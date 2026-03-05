@@ -1,0 +1,35 @@
+@page "{id:int}"
+@model DispancerPacient.Web.Pages.Patients.DeleteModel
+@{
+    ViewData["Title"] = "Удаление пациента";
+}
+
+<h1>Удаление пациента</h1>
+<hr />
+
+<div class="alert alert-danger">
+    <strong>Внимание!</strong> Вы собираетесь удалить запись пациента. Это действие необратимо.
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">ФИО</dt>
+            <dd class="col-sm-9">@Model.Patient.FullName</dd>
+            <dt class="col-sm-3">Дата рождения</dt>
+            <dd class="col-sm-9">@Model.Patient.BirthDate.ToString("dd.MM.yyyy")</dd>
+            <dt class="col-sm-3">ИНН</dt>
+            <dd class="col-sm-9">@(Model.Patient.IpnCode ?? "—")</dd>
+            <dt class="col-sm-3">Номер карты</dt>
+            <dd class="col-sm-9">@(Model.Patient.MedicalRecordNumber ?? "—")</dd>
+            <dt class="col-sm-3">Лечащий врач</dt>
+            <dd class="col-sm-9">@(Model.Patient.DoctorName ?? "—")</dd>
+        </dl>
+    </div>
+</div>
+
+<form method="post" class="mt-3">
+    <input type="hidden" asp-for="PatientId" />
+    <button type="submit" class="btn btn-danger">Удалить</button>
+    <a asp-page="Details" asp-route-id="@Model.PatientId" class="btn btn-secondary ms-2">Отмена</a>
+</form>
