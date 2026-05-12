@@ -14,7 +14,19 @@ public class AppDbContext : DbContext, IAppDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Явно указываем backing fields для коллекций с IReadOnlyCollection
+        modelBuilder.Entity<Doctor>()
+            .Navigation(d => d.Patients)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+        modelBuilder.Entity<Patient>()
+            .Navigation(p => p.Appointments)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+
+        // Убираем теневые навигации, которые EF мог создать по конвенции
+        modelBuilder.Entity<Doctor>().Ignore("Appointments");
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
