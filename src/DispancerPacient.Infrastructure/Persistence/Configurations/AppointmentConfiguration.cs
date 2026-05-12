@@ -12,7 +12,6 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
 
         builder.Property(a => a.DiagnosisCode).HasMaxLength(10);
         builder.Property(a => a.Notes).HasMaxLength(2000);
-        builder.Property(a => a.Prescription).HasMaxLength(2000);
 
         builder.HasIndex(a => a.AppointmentDate);
 
@@ -22,7 +21,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
             .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasOne(a => a.Doctor)
-            .WithMany(d => d.Appointments)
+            .WithMany()
             .HasForeignKey(a => a.DoctorId)
             .OnDelete(DeleteBehavior.Restrict);
     }
