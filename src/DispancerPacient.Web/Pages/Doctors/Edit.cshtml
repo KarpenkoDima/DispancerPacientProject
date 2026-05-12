@@ -1,0 +1,53 @@
+@page "{id:int}"
+@model DispancerPacient.Web.Pages.Doctors.EditModel
+@{
+    ViewData["Title"] = "Редактирование врача";
+}
+
+<h1>Редактирование врача</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <input type="hidden" asp-for="DoctorId" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Фамилия *</label>
+                <input asp-for="Input.LastName" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Имя *</label>
+                <input asp-for="Input.FirstName" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Отчество</label>
+                <input asp-for="Input.MiddleName" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Специализация *</label>
+                <input asp-for="Input.Specialization" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Номер лицензии</label>
+                <input asp-for="Input.LicenseNumber" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Телефон</label>
+                <input asp-for="Input.Phone" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input asp-for="Input.Email" class="form-control" type="email" />
+            </div>
+            <div class="form-check mb-3">
+                <input asp-for="Input.IsActive" class="form-check-input" />
+                <label class="form-check-label">Активен</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a asp-page="Index" class="btn btn-secondary ms-2">Отмена</a>
+        </form>
+    </div>
+</div>

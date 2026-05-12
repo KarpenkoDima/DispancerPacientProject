@@ -1,0 +1,40 @@
+@page
+@model DispancerPacient.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "Главная";
+}
+
+<div class="text-center mb-4">
+    <h1 class="display-5">Психиатрический диспансер</h1>
+    <p class="lead">Система управления базой пациентов</p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card text-bg-primary mb-3">
+            <div class="card-body text-center">
+                <h5 class="card-title">Пациенты на учёте</h5>
+                <p class="display-4">@Model.PatientCount</p>
+                <a asp-page="/Patients/Index" class="btn btn-light">Перейти</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-success mb-3">
+            <div class="card-body text-center">
+                <h5 class="card-title">Врачи</h5>
+                <p class="display-4">@Model.DoctorCount</p>
+                <a asp-page="/Doctors/Index" class="btn btn-light">Перейти</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-info mb-3">
+            <div class="card-body text-center">
+                <h5 class="card-title">Приёмы сегодня</h5>
+                <p class="display-4">@Model.TodayAppointments</p>
+                <a asp-page="/Appointments/Index" class="btn btn-light">Перейти</a>
+            </div>
+        </div>
+    </div>
+</div>

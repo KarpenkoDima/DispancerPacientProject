@@ -1,0 +1,58 @@
+@page "{id:int}"
+@model DispancerPacient.Web.Pages.Appointments.EditModel
+@using DispancerPacient.Domain.Enums
+@{
+    ViewData["Title"] = "Редактирование приёма";
+}
+
+<h1>Редактирование приёма</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <input type="hidden" asp-for="AppointmentId" />
+            <input type="hidden" asp-for="Input.PatientId" />
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label class="form-label">Пациент</label>
+                <input type="text" class="form-control" value="@Model.PatientName" disabled />
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Врач *</label>
+                    <select asp-for="Input.DoctorId" asp-items="Model.DoctorsList" class="form-select"></select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Дата и время *</label>
+                    <input asp-for="Input.AppointmentDate" class="form-control" type="datetime-local" />
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Тип приёма</label>
+                    <select asp-for="Input.Type" asp-items="Html.GetEnumSelectList<AppointmentType>()" class="form-select"></select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Статус</label>
+                    <select asp-for="Input.Status" asp-items="Html.GetEnumSelectList<AppointmentStatus>()" class="form-select"></select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Диагноз (МКХ-10)</label>
+                    <input asp-for="Input.DiagnosisCode" class="form-control" />
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Примечания</label>
+                <textarea asp-for="Input.Notes" class="form-control" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a asp-page="Index" class="btn btn-secondary ms-2">Отмена</a>
+        </form>
+    </div>
+</div>

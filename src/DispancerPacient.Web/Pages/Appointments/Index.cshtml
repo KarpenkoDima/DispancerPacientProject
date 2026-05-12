@@ -1,0 +1,57 @@
+@page
+@model DispancerPacient.Web.Pages.Appointments.IndexModel
+@{
+    ViewData["Title"] = "Приёмы";
+}
+
+<h1>Приёмы</h1>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <form method="get" class="d-flex gap-2">
+            <input type="date" asp-for="FilterDate" class="form-control" style="max-width:200px" />
+            <button type="submit" class="btn btn-primary">Фильтр</button>
+            <a asp-page="Index" class="btn btn-outline-secondary">Сбросить</a>
+        </form>
+    </div>
+    <div class="col-md-6 text-end">
+        <a asp-page="Create" class="btn btn-success">+ Новый приём</a>
+    </div>
+</div>
+
+@if (!Model.Appointments.Any())
+{
+    <div class="alert alert-info">Приёмы не найдены.</div>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Дата</th>
+                <th>Пациент</th>
+                <th>Врач</th>
+                <th>Тип</th>
+                <th>Диагноз</th>
+                <th>Статус</th>
+                <th>Действия</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var apt in Model.Appointments)
+            {
+                <tr>
+                    <td>@apt.AppointmentDate.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>@apt.PatientName</td>
+                    <td>@apt.DoctorName</td>
+                    <td>@apt.TypeName</td>
+                    <td>@(apt.DiagnosisCode ?? "—")</td>
+                    <td><span class="badge bg-info">@apt.StatusName</span></td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@apt.Id" class="btn btn-sm btn-outline-primary">Ред.</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
