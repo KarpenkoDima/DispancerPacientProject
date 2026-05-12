@@ -20,8 +20,8 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
         builder.Property(p => p.DiagnosisCode).HasMaxLength(10);
         builder.Property(p => p.DiagnosisDescription).HasMaxLength(1000);
 
-        builder.HasIndex(p => p.IpnCode).IsUnique().HasFilter("[IpnCode] IS NOT NULL");
-        builder.HasIndex(p => p.MedicalRecordNumber).IsUnique().HasFilter("[MedicalRecordNumber] IS NOT NULL");
+        builder.HasIndex(p => p.IpnCode).IsUnique().HasFilter("\"IpnCode\" IS NOT NULL");
+        builder.HasIndex(p => p.MedicalRecordNumber).IsUnique().HasFilter("\"MedicalRecordNumber\" IS NOT NULL");
         builder.HasIndex(p => p.LastName);
 
         builder.HasOne(p => p.Doctor)
@@ -29,7 +29,7 @@ public class PatientConfiguration : IEntityTypeConfiguration<Patient>
             .HasForeignKey(p => p.DoctorId)
             .OnDelete(DeleteBehavior.SetNull);
 
-        // Игнорируем вычисляемое свойство FullName
         builder.Ignore(p => p.FullName);
+        builder.Ignore(p => p.DomainEvents);
     }
 }

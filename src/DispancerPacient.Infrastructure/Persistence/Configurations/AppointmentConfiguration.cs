@@ -9,6 +9,7 @@ public class AppointmentConfiguration : IEntityTypeConfiguration<Appointment>
     public void Configure(EntityTypeBuilder<Appointment> builder)
     {
         builder.HasKey(a => a.Id);
+        builder.Ignore(a => a.DomainEvents);
 
         builder.Property(a => a.DiagnosisCode).HasMaxLength(10);
         builder.Property(a => a.Notes).HasMaxLength(2000);

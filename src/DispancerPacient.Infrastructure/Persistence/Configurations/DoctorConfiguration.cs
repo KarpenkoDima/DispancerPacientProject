@@ -18,8 +18,8 @@ public class DoctorConfiguration : IEntityTypeConfiguration<Doctor>
         builder.Property(d => d.Phone).HasMaxLength(20);
         builder.Property(d => d.Email).HasMaxLength(100);
 
-        // Игнорируем вычисляемое свойство FullName
         builder.Ignore(d => d.FullName);
+        builder.Ignore(d => d.DomainEvents);
 
         // Начальные данные — 3 врача
         builder.HasData(
