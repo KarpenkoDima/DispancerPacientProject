@@ -1,0 +1,48 @@
+@page
+@model DispancerPacient.Web.Pages.Doctors.IndexModel
+@{
+    ViewData["Title"] = "Врачи";
+}
+
+<h1>Врачи диспансера</h1>
+
+<div class="mb-3 text-end">
+    <a asp-page="Create" class="btn btn-success">+ Новый врач</a>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>ФИО</th>
+            <th>Специализация</th>
+            <th>Номер лицензии</th>
+            <th>Пациентов на учёте</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var doctor in Model.Doctors)
+        {
+            <tr>
+                <td>@doctor.FullName</td>
+                <td>@doctor.Specialization</td>
+                <td>@(doctor.LicenseNumber ?? "—")</td>
+                <td>@doctor.PatientCount</td>
+                <td>
+                    @if (doctor.IsActive)
+                    {
+                        <span class="badge bg-success">Активен</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">Неактивен</span>
+                    }
+                </td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@doctor.Id" class="btn btn-sm btn-outline-primary">Ред.</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

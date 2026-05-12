@@ -1,0 +1,115 @@
+@page
+@model DispancerPacient.Web.Pages.Patients.CreateModel
+@{
+    ViewData["Title"] = "Новый пациент";
+}
+
+<h1>Регистрация нового пациента</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <fieldset class="mb-4">
+                <legend>Персональные данные</legend>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Фамилия *</label>
+                        <input asp-for="Input.LastName" class="form-control" />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Имя *</label>
+                        <input asp-for="Input.FirstName" class="form-control" />
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Отчество</label>
+                        <input asp-for="Input.MiddleName" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Дата рождения *</label>
+                        <input asp-for="Input.BirthDate" class="form-control" type="date" />
+                        <span asp-validation-for="Input.BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Пол</label>
+                        <select asp-for="Input.Gender" asp-items="Html.GetEnumSelectList<DispancerPacient.Domain.Enums.Gender>()" class="form-select">
+                            <option value="">-- Выберите --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">ИНН (ИПН)</label>
+                        <input asp-for="Input.IpnCode" class="form-control" maxlength="10" />
+                        <span asp-validation-for="Input.IpnCode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <label class="form-label">Адрес</label>
+                        <input asp-for="Input.Address" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Телефон</label>
+                        <input asp-for="Input.Phone" class="form-control" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mb-4">
+                <legend>Медицинские данные</legend>
+
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Диагноз (МКХ-10)</label>
+                        <input asp-for="Input.DiagnosisCode" class="form-control" placeholder="F20.0" />
+                        <span asp-validation-for="Input.DiagnosisCode" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Лечащий врач</label>
+                        <select asp-for="Input.DoctorId" asp-items="Model.DoctorsList" class="form-select">
+                            <option value="">-- Выберите врача --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Описание диагноза</label>
+                    <textarea asp-for="Input.DiagnosisDescription" class="form-control" rows="2"></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset class="mb-4">
+                <legend>Учёт</legend>
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-check mt-2">
+                            <input asp-for="Input.IsOnRecord" class="form-check-input" />
+                            <label class="form-check-label">На диспансерном учёте</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Дата постановки на учёт</label>
+                        <input asp-for="Input.RegistrationDate" class="form-control" type="date" />
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <a asp-page="Index" class="btn btn-secondary ms-2">Отмена</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
